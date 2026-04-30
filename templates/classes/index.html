@@ -2,4 +2,17 @@
 
 {% block content %}
   <h1>Cooked Courses Home</h1>
+  <p>Welcome to Best Cooked Courses Ever!</p>
+  <h2>A large number of courses!</h2>
+  <p>The Cooking courses has the following record counts:</p>
+  <ul>
+    <li><strong>Chefs:</strong> {{ num_chefs }}</li>
+    <li><strong>Cuisines:</strong> {{ num_cuisines }}</li>
+    <li><strong>Ingredients:</strong> {{ num_ingredients }}</li>
+    <li><strong>Cooking Classes:</strong>{{ num_cooking_classes }}</li>
+  </ul>
+
+  <p>You have visited this page:
+      {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
 {% endblock %}
