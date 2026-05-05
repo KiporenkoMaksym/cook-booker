@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Master class: {{ cooking_class.name }}</h1>
+
+  <section>
+    <h2>Course details</h2>
+    <ul>
+      <li><strong>Kitchen type:</strong> {{ cooking_class.cuisine.name }}</li>
+      <li><strong>Cost:</strong> {{ cooking_class.price }} UAH</li>
+      <li><strong>Chef:</strong>
+        {% for chef in cooking_class.chefs.all %}
+          <a href="{% url 'classes:chef-detail' pk=chef.id %}">
+            {{ chef.first_name }} {{ chef.last_name }}
+          </a>
+        {% endfor %}
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Description</h3>
+    <p>{{ cooking_class.description }}</p>
+  </section>
+
+  <section>
+    <h3>Required ingredients</h3>
+    {% if cooking_class.ingredients.all %}
+      <ul>
+        {% for ingredient in cooking_class.ingredients.all %}
+          <li>{{ ingredient.name }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No ingredients are listed for this master class.</p>
+    {% endif %}
+  </section>
+
+{% endblock %}
