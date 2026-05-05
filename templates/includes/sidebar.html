@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<ul>
+  <li class="list-group-item"><a href="{% url 'classes:index' %}">Home</a></li>
+  <li class="list-group-item"><a href="{% url 'classes:chef-list' %}">All chefs</a></li>
+  <li class="list-group-item"><a href="{% url 'classes:cuisine-list' %}">All cuisines</a></li>
+  <li class="list-group-item"><a href="{% url 'classes:ingredient-list' %}">All ingredients</a></li>
+  <li class="list-group-item"><a href="{% url 'classes:cooking-classes-list' %}">All cooking classes</a></li>
+</ul>
