@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Username: {{ chef.username }}
+  </h1>
+
+  <p><strong>First name: {{ chef.first_name }}</strong></p>
+  <p><strong>Last name: {{ chef.last_name }}</strong></p>
+
+  <p><strong>Work experience:</strong> {{ chef.years_of_experience }} років</p>
+
+  <h2>Chef's master classes</h2>
+    {% if chef.cooking_classes.all %}
+      <ul>
+        {% for cooking_class in chef.cooking_classes.all %}
+          <li>
+            <a href="{% url 'classes:cooking-classes-detail' pk=cooking_class.id %}">
+              {{ cooking_class.name }}
+            </a>
+            — {{ cooking_class.price }} UAH ({{ cooking_class.cuisine.name }})
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>This chef does not yet hold master classes.</p>
+    {% endif %}
+{% endblock %}

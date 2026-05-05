@@ -6,7 +6,8 @@ from classes.views import (
     CuisineListView,
     IngredientListView,
     CookingClassListView,
-    ChefDetailView, CookingClassDetailView,
+    ChefDetailView,
+    CookingClassDetailView,
 )
 
 urlpatterns = [
