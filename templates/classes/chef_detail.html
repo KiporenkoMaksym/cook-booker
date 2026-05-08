@@ -5,20 +5,20 @@
     Username: {{ chef.username }}
   </h1>
 
-  <p><strong>First name: {{ chef.first_name }}</strong></p>
-  <p><strong>Last name: {{ chef.last_name }}</strong></p>
+  <p><strong>First name:</strong> {{ chef.first_name }}</p>
+  <p><strong>Last name:</strong> {{ chef.last_name }}</p>
 
-  <p><strong>Work experience:</strong> {{ chef.years_of_experience }} років</p>
+  <p><strong>Work experience:</strong> {{ chef.years_of_experience }} year{{ chef.years_of_experience|pluralize }}</p>
 
-  <h2>Chef's master classes</h2>
+  <h2>Chef's master classes:</h2>
     {% if chef.cooking_classes.all %}
       <ul>
         {% for cooking_class in chef.cooking_classes.all %}
           <li>
             <a href="{% url 'classes:cooking-classes-detail' pk=cooking_class.id %}">
-              {{ cooking_class.name }}
+              {{ cooking_class.title }}
             </a>
-            — {{ cooking_class.price }} UAH ({{ cooking_class.cuisine.name }})
+            ({{ cooking_class.cuisine.name }}) — {{ cooking_class.price }} $
           </li>
         {% endfor %}
       </ul>

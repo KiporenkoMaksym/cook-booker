@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+  <h1>Chef List</h1>
+  {% if chef_list %}
+    <ul>
+      {% for chef in chef_list %}
+        <li>
+          <a href="{% url 'classes:chef-detail' pk=chef.id %}">{{ chef.id }}</a>
+          {{ chef.first_name }} {{ chef.last_name }}
+        </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>There are no chefs in courses</p>
+  {% endif %}
+{% endblock %}

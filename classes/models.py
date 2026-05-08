@@ -48,6 +48,7 @@ class Ingredient(models.Model):
 class CookingClass(models.Model):
     title = models.CharField(max_length=255, unique=True)
     preparation_time = models.IntegerField(validators=[MinValueValidator(1)])
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE, related_name="cooking_classes")
     ingredients = models.ManyToManyField(Ingredient, related_name="cooking_classes")
     chefs = models.ManyToManyField(Chef, related_name="cooking_classes")

@@ -27,7 +27,7 @@ def index(request):
 
 class ChefListView(LoginRequiredMixin, generic.ListView):
     model = Chef
-    context_object_name = "chef-list"
+    context_object_name = "chef_list"
     paginate_by = 5
 
 
@@ -38,20 +38,20 @@ class ChefDetailView(LoginRequiredMixin, generic.DetailView):
 
 class CuisineListView(LoginRequiredMixin, generic.ListView):
     model = Cuisine
-    context_object_name = "cuisine-list"
+    context_object_name = "cuisine_list"
     paginate_by = 5
 
 
 class IngredientListView(LoginRequiredMixin, generic.ListView):
     model = Ingredient
-    context_object_name = "ingredient-list"
+    context_object_name = "ingredient_list"
     paginate_by = 5
 
 
 class CookingClassListView(LoginRequiredMixin, generic.ListView):
     model = CookingClass
     queryset = CookingClass.objects.select_related("cuisine", "chef")
-    context_object_name = "cooking-class-list"
+    context_object_name = "cooking_class_list"
     paginate_by = 5
 
 
