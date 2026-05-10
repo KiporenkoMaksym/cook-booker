@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Master class: {{ cooking_class.name }}</h1>
+  <h1>Master class: {{ cooking_class.title }}</h1>
 
   <section>
     <h2>Course details</h2>
     <ul>
       <li><strong>Kitchen type:</strong> {{ cooking_class.cuisine.name }}</li>
-      <li><strong>Cost:</strong> {{ cooking_class.price }} UAH</li>
+      <li><strong>Cost:</strong> {{ cooking_class.price }} $</li>
       <li><strong>Chef:</strong>
         {% for chef in cooking_class.chefs.all %}
           <a href="{% url 'classes:chef-detail' pk=chef.id %}">

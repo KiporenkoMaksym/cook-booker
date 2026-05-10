@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
 
@@ -25,37 +25,38 @@ def index(request):
 
     return render (request, "classes/index.html", context)
 
-class ChefListView(LoginRequiredMixin, generic.ListView):
+class ChefListView(generic.ListView):
     model = Chef
     context_object_name = "chef_list"
     paginate_by = 5
 
 
-class ChefDetailView(LoginRequiredMixin, generic.DetailView):
+class ChefDetailView(generic.DetailView):
     model = Chef
     template_name = "classes/chef_detail.html"
 
 
-class CuisineListView(LoginRequiredMixin, generic.ListView):
+class CuisineListView(generic.ListView):
     model = Cuisine
     context_object_name = "cuisine_list"
     paginate_by = 5
 
 
-class IngredientListView(LoginRequiredMixin, generic.ListView):
+class IngredientListView(generic.ListView):
     model = Ingredient
     context_object_name = "ingredient_list"
     paginate_by = 5
 
 
-class CookingClassListView(LoginRequiredMixin, generic.ListView):
+class CookingClassListView(generic.ListView):
     model = CookingClass
     queryset = CookingClass.objects.select_related("cuisine", "chef")
     context_object_name = "cooking_class_list"
     paginate_by = 5
 
 
-class CookingClassDetailView(LoginRequiredMixin, generic.DetailView):
+class CookingClassDetailView(generic.DetailView):
     model = CookingClass
     template_name = "classes/cooking_class_detail.html"
+    context_object_name = "cooking_class"
     queryset = CookingClass.objects.select_related("cuisine").prefetch_related("ingredients")
