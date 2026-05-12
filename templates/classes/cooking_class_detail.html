@@ -8,12 +8,17 @@
     <ul>
       <li><strong>Kitchen type:</strong> {{ cooking_class.cuisine.name }}</li>
       <li><strong>Cost:</strong> {{ cooking_class.price }} $</li>
-      <li><strong>Chef:</strong>
-        {% for chef in cooking_class.chefs.all %}
-          <a href="{% url 'classes:chef-detail' pk=chef.id %}">
-            {{ chef.first_name }} {{ chef.last_name }}
-          </a>
-        {% endfor %}
+      <li>
+        <div class="d-flex align-items-start">
+          <strong class="me-1">Chef:</strong>
+          <div class="d-flex flex-column">
+            {% for chef in cooking_class.chefs.all %}
+              <a href="{% url 'classes:chef-detail' pk=chef.id %}">
+                {{ chef.first_name }} {{ chef.last_name }};
+              </a>
+            {% endfor %}
+          </div>
+        </div>
       </li>
     </ul>
   </section>
