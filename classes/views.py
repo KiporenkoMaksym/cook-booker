@@ -1,10 +1,11 @@
-# from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
 
 from classes.models import Chef, Ingredient, Cuisine, CookingClass
 
-
+@login_required
 def index(request):
 
     num_chefs = Chef.objects.count()
@@ -25,37 +26,37 @@ def index(request):
 
     return render (request, "classes/index.html", context)
 
-class ChefListView(generic.ListView):
+class ChefListView(LoginRequiredMixin, generic.ListView):
     model = Chef
     context_object_name = "chef_list"
     paginate_by = 5
 
 
-class ChefDetailView(generic.DetailView):
+class ChefDetailView(LoginRequiredMixin, generic.DetailView):
     model = Chef
     template_name = "classes/chef_detail.html"
 
 
-class CuisineListView(generic.ListView):
+class CuisineListView(LoginRequiredMixin, generic.ListView):
     model = Cuisine
     context_object_name = "cuisine_list"
     paginate_by = 5
 
 
-class IngredientListView(generic.ListView):
+class IngredientListView(LoginRequiredMixin, generic.ListView):
     model = Ingredient
     context_object_name = "ingredient_list"
     paginate_by = 5
 
 
-class CookingClassListView(generic.ListView):
+class CookingClassListView(LoginRequiredMixin, generic.ListView):
     model = CookingClass
     queryset = CookingClass.objects.select_related("cuisine", "chef")
     context_object_name = "cooking_class_list"
     paginate_by = 5
 
 
-class CookingClassDetailView(generic.DetailView):
+class CookingClassDetailView(LoginRequiredMixin, generic.DetailView):
     model = CookingClass
     template_name = "classes/cooking_class_detail.html"
     context_object_name = "cooking_class"

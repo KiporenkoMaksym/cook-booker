@@ -1,4 +1,25 @@
-<ul>
+<ul class="sidebar-nav list-group">
+  {% if user.is_authenticated %}
+
+    <li class="list-group-item">User: <a href="{{ user.get_absolute_url }}">{{ user.get_username }}</a></li>
+
+    <li class="list-group-item">
+      <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link p-0 m-0 align-baseline" style="text-decoration: none;">
+          Logout
+        </button>
+      </form>
+    </li>
+
+    {% else %}
+
+    <li class="list-group-item"><a href="{% url 'login' %}">Login</a></li>
+
+  {% endif %}
+
+  <br>
+
   <li class="list-group-item"><a href="{% url 'classes:index' %}">Home</a></li>
   <li class="list-group-item"><a href="{% url 'classes:chef-list' %}">All chefs</a></li>
   <li class="list-group-item"><a href="{% url 'classes:cuisine-list' %}">All cuisines</a></li>

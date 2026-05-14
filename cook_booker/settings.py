@@ -132,6 +132,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "classes.Chef"
 
 LOGIN_REDIRECT_URL = "classes:index"
+LOGOUT_REDIRECT_URL = "login"
 
 INTERNAL_IPS = [
     "127.0.0.1",
