@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>List of all courses</h2>
+
+  {% if cuisine.cooking_classes.all %}
+    <ul>
+    {% for cooking_class in cuisine.cooking_classes.all %}
+      <li>
+        <a href="{% url 'classes:cooking-classes-detail' pk=cooking_class.id %}">
+          {{ cooking_class.title }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>Cooking classes not added yet!</p>
+  {% endif %}
+{% endblock %}

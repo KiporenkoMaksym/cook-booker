@@ -43,6 +43,11 @@ class CuisineListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
 
+class CuisineDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Cuisine
+    template_name = "classes/cuisine_detail.html"
+
+
 class IngredientListView(LoginRequiredMixin, generic.ListView):
     model = Ingredient
     context_object_name = "ingredient_list"

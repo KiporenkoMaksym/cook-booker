@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+  <h1>List of world cuisines</h1>
+  {% if cuisine_list %}
+    <ul>
+      {% for cuisine in cuisine_list %}
+        <li><a href="{% url 'classes:cuisine-detail' pk=cuisine.id %}">{{ cuisine.name }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no cuisines in the database.</p>
+  {% endif %}
+{% endblock %}
