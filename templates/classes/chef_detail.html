@@ -18,7 +18,6 @@
             <a href="{% url 'classes:cooking-classes-detail' pk=cooking_class.id %}">
               {{ cooking_class.title }}
             </a>
-            ({{ cooking_class.cuisine.name }}) — {{ cooking_class.price }} $
           </li>
         {% endfor %}
       </ul>

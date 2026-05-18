@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+  <h2>List of all ingredients</h2>
+
+  {% if ingredient_list %}
+    <ul>
+    {% for ingredient in ingredient_list %}
+      <li>{{ ingredient.name }}</li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no ingredients in the database.</p>
+  {% endif %}
+{% endblock %}
