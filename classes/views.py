@@ -56,8 +56,8 @@ class IngredientListView(LoginRequiredMixin, generic.ListView):
 
 class CookingClassListView(LoginRequiredMixin, generic.ListView):
     model = CookingClass
-    queryset = CookingClass.objects.select_related("cuisine", "chef")
-    context_object_name = "cooking_class_list"
+    queryset = CookingClass.objects.select_related("cuisine")
+    context_object_name = "cooking_class"
     paginate_by = 5
 
 

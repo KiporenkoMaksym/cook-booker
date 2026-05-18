@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>List of all courses</h2>
+
+  {% if cooking_class %}
+    <ul>
+    {% for class in cooking_class %}
+      <li>
+        <a href="{% url 'classes:cooking-classes-detail' pk=class.id %}">
+          {{ class.title }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
