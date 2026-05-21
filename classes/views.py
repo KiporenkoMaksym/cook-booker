@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.views import generic
 
@@ -30,6 +31,12 @@ class ChefListView(LoginRequiredMixin, generic.ListView):
     model = Chef
     context_object_name = "chef_list"
     paginate_by = 5
+
+
+class ChefCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Chef
+    fields = "__all__"
+    success_url = reverse_lazy("classes:chef-list")
 
 
 class ChefDetailView(LoginRequiredMixin, generic.DetailView):
