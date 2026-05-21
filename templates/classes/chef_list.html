@@ -1,19 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>
+  <h1 class="d-flex justify-content-between align-items-center">
     Chef List
     <a href="{% url 'classes:chef-create' %}" class="btn btn-primary link-to-page">Create</a>
   </h1>
   {% if chef_list %}
-    <ul>
-      {% for chef in chef_list %}
-        <li>
-          <a href="{% url 'classes:chef-detail' pk=chef.id %}">{{ chef.id }}</a>
-          {{ chef.first_name }} {{ chef.last_name }}
-        </li>
-      {% endfor %}
-    </ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Years of experience</th>
+      </tr>
+    {% for chef in chef_list %}
+      <tr>
+        <td>{{ chef.id }}</td>
+        <td>{{ chef.username }}</td>
+        <td>{{ chef.first_name }}</td>
+        <td>{{ chef.last_name }}</td>
+        <td>{{ chef.years_of_experience }}</td>
+        <td>
+          <a href="{% url "classes:chef-update" chef.pk %}">
+            Update
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
     {% else %}
       <p>There are no chefs in courses</p>
   {% endif %}

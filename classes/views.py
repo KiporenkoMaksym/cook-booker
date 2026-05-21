@@ -33,15 +33,26 @@ class ChefListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
 
+class ChefDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Chef
+    template_name = "classes/chef_detail.html"
+
+
 class ChefCreateView(LoginRequiredMixin, generic.CreateView):
     model = Chef
     fields = "__all__"
     success_url = reverse_lazy("classes:chef-list")
 
 
-class ChefDetailView(LoginRequiredMixin, generic.DetailView):
+class ChefUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Chef
-    template_name = "classes/chef_detail.html"
+    fields = "__all__"
+    success_url = reverse_lazy("classes:chef-list")
+
+
+class ChefDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Chef
+    success_url = reverse_lazy("classes:chef-list")
 
 
 class CuisineListView(LoginRequiredMixin, generic.ListView):

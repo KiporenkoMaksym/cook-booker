@@ -10,12 +10,16 @@ from classes.views import (
     CookingClassDetailView,
     CuisineDetailView,
     ChefCreateView,
+    ChefUpdateView,
+    ChefDeleteView,
 )
 
 urlpatterns = [
     path("", index, name="index"),
     path("chefs/", ChefListView.as_view(), name="chef-list"),
     path("chefs/create/", ChefCreateView.as_view(), name="chef-create"),
+    path("chefs/<int:pk>/update/", ChefUpdateView.as_view(), name="chef-update"),
+    path("chefs/<int:pk>/delete/", ChefDeleteView.as_view(), name="chef-delete"),
     path("chefs/<int:pk>/", ChefDetailView.as_view(), name="chef-detail"),
     path("cuisines/", CuisineListView.as_view(), name="cuisine-list"),
     path("cuisines/<int:pk>/", CuisineDetailView.as_view(), name="cuisine-detail"),
