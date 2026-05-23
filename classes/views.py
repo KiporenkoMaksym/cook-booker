@@ -88,6 +88,23 @@ class IngredientListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
 
+class IngredientCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Ingredient
+    fields = "__all__"
+    success_url = reverse_lazy("classes:ingredient-list")
+
+
+class IngredientUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Ingredient
+    fields = "__all__"
+    success_url = reverse_lazy("classes:ingredient-list")
+
+
+class IngredientDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Ingredient
+    success_url = reverse_lazy("classes:ingredient-list")
+
+
 class CookingClassListView(LoginRequiredMixin, generic.ListView):
     model = CookingClass
     queryset = CookingClass.objects.select_related("cuisine")

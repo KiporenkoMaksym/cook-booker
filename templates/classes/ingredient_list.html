@@ -1,14 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>List of all ingredients</h2>
+  <h2 class="d-flex justify-content-between align-items-center">
+    List of all ingredients
+    <a href="{% url 'classes:ingredient-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h2>
 
   {% if ingredient_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
     {% for ingredient in ingredient_list %}
-      <li>{{ ingredient.name }}</li>
+      <tr>
+        <td>{{ ingredient.id }}</td>
+        <td>{{ ingredient.name }}</td>
+        <td>
+          <a href="{% url 'classes:ingredient-update' ingredient.id %}">
+            Update
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'classes:ingredient-delete' ingredient.id %}">
+            Delete
+          </a>
+        </td>
+      </tr>
     {% endfor %}
-    </ul>
+    </table>
   {% else %}
     <p>There are no ingredients in the database.</p>
   {% endif %}

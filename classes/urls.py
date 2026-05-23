@@ -15,6 +15,9 @@ from classes.views import (
     CuisineCreateView,
     CuisineUpdateView,
     CuisineDeleteView,
+    IngredientCreateView,
+    IngredientUpdateView,
+    IngredientDeleteView,
 )
 
 urlpatterns = [
@@ -30,6 +33,9 @@ urlpatterns = [
     path("cuisines/<int:pk>/update/", CuisineUpdateView.as_view(), name="cuisine-update"),
     path("cuisines/<int:pk>/delete/", CuisineDeleteView.as_view(), name="cuisine-delete"),
     path("ingredients/", IngredientListView.as_view(), name="ingredient-list"),
+    path("ingredients/create/", IngredientCreateView.as_view(), name="ingredient-create"),
+    path("ingredients/<int:pk>/update/", IngredientUpdateView.as_view(), name="ingredient-update"),
+    path("ingredients/<int:pk>/delete", IngredientDeleteView.as_view(), name="ingredient-delete"),
     path("cooking_classes", CookingClassListView.as_view(), name="cooking-classes-list"),
     path("cooking_classes/<int:pk>/", CookingClassDetailView.as_view(), name="cooking-classes-detail")
 ]
