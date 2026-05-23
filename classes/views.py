@@ -66,6 +66,22 @@ class CuisineDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "classes/cuisine_detail.html"
 
 
+class CuisineCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Cuisine
+    fields = "__all__"
+    success_url = reverse_lazy("classes:cuisine-list")
+
+
+class CuisineUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Cuisine
+    fields = "__all__"
+    success_url = reverse_lazy("classes:cuisine-list")
+
+
+class CuisineDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Cuisine
+    success_url = reverse_lazy("classes:cuisine-list")
+
 class IngredientListView(LoginRequiredMixin, generic.ListView):
     model = Ingredient
     context_object_name = "ingredient_list"
