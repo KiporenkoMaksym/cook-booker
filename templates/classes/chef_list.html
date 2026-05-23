@@ -13,6 +13,8 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Years of experience</th>
+        <th>Update</th>
+        <th>Delete</th>
       </tr>
     {% for chef in chef_list %}
       <tr>
@@ -22,8 +24,13 @@
         <td>{{ chef.last_name }}</td>
         <td>{{ chef.years_of_experience }}</td>
         <td>
-          <a href="{% url "classes:chef-update" chef.pk %}">
+          <a href="{% url 'classes:chef-update' chef.pk %}">
             Update
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'classes:chef-delete' chef.pk %}">
+            Delete
           </a>
         </td>
       </tr>
