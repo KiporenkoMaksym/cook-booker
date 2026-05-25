@@ -6,7 +6,7 @@
     <a href="{% url 'classes:chef-create' %}" class="btn btn-primary link-to-page">Create</a>
   </h1>
   {% if chef_list %}
-    <table class="table">
+    <table class="table text-center">
       <tr>
         <th>ID</th>
         <th>Username</th>
@@ -19,7 +19,7 @@
     {% for chef in chef_list %}
       <tr>
         <td>{{ chef.id }}</td>
-        <td>{{ chef.username }}</td>
+        <td><a href="{% url 'classes:chef-detail' chef.id%}">{{ chef.username }}</a></td>
         <td>{{ chef.first_name }}</td>
         <td>{{ chef.last_name }}</td>
         <td>{{ chef.years_of_experience }}</td>

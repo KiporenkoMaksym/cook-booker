@@ -1,17 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>List of all courses</h2>
+  <h2 class="d-flex justify-content-between align-items-center">
+    List of all courses
+    <a href="{% url 'classes:cooking-classes-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h2>
 
   {% if cooking_class %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th class="text-center">Preparation time</th>
+        <th>Price</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
     {% for class in cooking_class %}
-      <li>
-        <a href="{% url 'classes:cooking-classes-detail' pk=class.id %}">
-          {{ class.title }}
-        </a>
-      </li>
+      <tr>
+        <td>{{ class.id }}</td>
+        <td><a href="{% url 'classes:cooking-classes-detail' class.id%}">{{ class.title }}</a></td>
+        <td class="text-center">{{ class.preparation_time }}</td>
+        <td>{{ class.price }}$</td>
+        <td>
+          <a href="{% url 'classes:cooking-classes-update' class.id %}">
+            Update
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'classes:cooking-classes-delete' class.id %}">
+            Delete
+          </a>
+        </td>
+        <td>
+      </tr>
     {% endfor %}
-    </ul>
+    </table>
   {% endif %}
 {% endblock %}

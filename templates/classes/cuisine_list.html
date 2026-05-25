@@ -18,7 +18,7 @@
     {% for cuisine in cuisine_list %}
       <tr>
         <td>{{ cuisine.id }}</td>
-        <td>{{ cuisine.name }}</td>
+        <td><a href="{% url 'classes:cuisine-detail' cuisine.id%}">{{ cuisine.name }}</a></td>
         <td>
           <a href="{% url 'classes:cuisine-update' cuisine.id %}">
             Update

@@ -117,3 +117,23 @@ class CookingClassDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "classes/cooking_class_detail.html"
     context_object_name = "cooking_class"
     queryset = CookingClass.objects.select_related("cuisine").prefetch_related("ingredients")
+
+
+class CookingClassCreateView(LoginRequiredMixin, generic.CreateView):
+    model = CookingClass
+    fields = "__all__"
+    template_name = "classes/cooking_class_form.html"
+    success_url = reverse_lazy("classes:cooking-classes-list")
+
+
+class CookingClassUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = CookingClass
+    fields = "__all__"
+    template_name = "classes/cooking_class_form.html"
+    success_url = reverse_lazy("classes:cooking-classes-list")
+
+
+class CookingClassDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = CookingClass
+    template_name = "classes/cooking_class_confirm_delete.html"
+    success_url = reverse_lazy("classes:cooking-classes-list")

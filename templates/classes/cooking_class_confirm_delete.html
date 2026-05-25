@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Delete cooking class</h1>
+  <p>Are you sure you want to delete the cooking class "{{ class.title }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Yes" class="btn btn-danger">
+    <a href="{% url 'classes:cooking-classes-list' %}" class="btn btn-secondary">No</a>
+  </form>
+{% endblock %}
