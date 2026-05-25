@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.views import generic
 
+from classes.forms import CookingClassForm
 from classes.models import Chef, Ingredient, Cuisine, CookingClass
 
 @login_required
@@ -121,7 +122,7 @@ class CookingClassDetailView(LoginRequiredMixin, generic.DetailView):
 
 class CookingClassCreateView(LoginRequiredMixin, generic.CreateView):
     model = CookingClass
-    fields = "__all__"
+    form_class = CookingClassForm
     template_name = "classes/cooking_class_form.html"
     success_url = reverse_lazy("classes:cooking-classes-list")
 
