@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+  
+  <form action="" method="get">
+    {{ search_form }}
+    <button type="submit" class="btn btn-primary">Search</button>
+    <a href="{% url 'classes:cooking-classes-list' %}">Clear search</a>
+  </form>
+
   <h2 class="d-flex justify-content-between align-items-center">
     List of all courses
     <a href="{% url 'classes:cooking-classes-create' %}" class="btn btn-primary link-to-page">

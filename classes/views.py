@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.views import generic
 
-from classes.forms import CookingClassForm
+from classes.forms import CookingClassForm, CookingClassSearchForm, ChefSearchForm
 from classes.models import Chef, Ingredient, Cuisine, CookingClass
 
 @login_required
@@ -32,6 +32,21 @@ class ChefListView(LoginRequiredMixin, generic.ListView):
     model = Chef
     context_object_name = "chef_list"
     paginate_by = 5
+
+    def get_queryset(self):
+        queryset = Chef.objects.all()
+        form = ChefSearchForm(self.request.GET)
+
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            if username:
+                queryset = queryset.filter(username__icontains=username)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = ChefSearchForm(self.request.GET)
+        return context
 
 
 class ChefDetailView(LoginRequiredMixin, generic.DetailView):
@@ -112,6 +127,22 @@ class CookingClassListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "cooking_class"
     paginate_by = 5
 
+    def get_queryset(self):
+        queryset = CookingClass.objects.all().select_related("cuisine")
+        form = CookingClassSearchForm(self.request.GET)
+
+        if form.is_valid():
+            title = form.cleaned_data.get("title")
+            if title:
+                queryset = queryset.filter(title__icontains=title)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = CookingClassSearchForm(self.request.GET)
+        return context
+
 
 class CookingClassDetailView(LoginRequiredMixin, generic.DetailView):
     model = CookingClass
@@ -129,7 +160,7 @@ class CookingClassCreateView(LoginRequiredMixin, generic.CreateView):
 
 class CookingClassUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = CookingClass
-    fields = "__all__"
+    form_class = CookingClassForm
     template_name = "classes/cooking_class_form.html"
     success_url = reverse_lazy("classes:cooking-classes-list")
 

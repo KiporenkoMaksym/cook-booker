@@ -14,3 +14,31 @@ class CookingClassForm(forms.ModelForm):
     class Meta:
         model = CookingClass
         fields = "__all__"
+
+
+class CookingClassSearchForm(forms.Form):
+    title = forms.CharField(
+        max_length=255,
+        required=False,
+        label = "",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Search by title",
+            }
+        )
+    )
+
+
+class ChefSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        required=False,
+        label = "",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Search by username",
+            }
+        )
+    )
