@@ -52,6 +52,7 @@ class CookingClass(models.Model):
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE, related_name="cooking_classes")
     ingredients = models.ManyToManyField(Ingredient, related_name="cooking_classes")
     chefs = models.ManyToManyField(Chef, related_name="cooking_classes")
+    students = models.ManyToManyField(Chef, related_name="joined_classes", blank=True)
 
     class Meta:
         verbose_name_plural = "cooking classes"

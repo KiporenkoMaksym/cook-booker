@@ -21,6 +21,7 @@ from classes.views import (
     CookingClassCreateView,
     CookingClassUpdateView,
     CookingClassDeleteView,
+    ToggleAssignCookingClassView,
 )
 
 urlpatterns = [
@@ -40,6 +41,7 @@ urlpatterns = [
     path("ingredients/<int:pk>/update/", IngredientUpdateView.as_view(), name="ingredient-update"),
     path("ingredients/<int:pk>/delete", IngredientDeleteView.as_view(), name="ingredient-delete"),
     path("cooking_classes", CookingClassListView.as_view(), name="cooking-classes-list"),
+    path("cooking_classes/<int:pk>/toggle-assign", ToggleAssignCookingClassView.as_view(), name="cooking-classes-toggle-assign"),
     path("cooking_classes/<int:pk>/", CookingClassDetailView.as_view(), name="cooking-classes-detail"),
     path("cooking_classes/create/", CookingClassCreateView.as_view(), name="cooking-classes-create"),
     path("cooking_classes/<int:pk>/update/", CookingClassUpdateView.as_view(), name="cooking-classes-update"),

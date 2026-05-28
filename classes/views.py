@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.shortcuts import render
-from django.views import generic
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views import generic, View
 
 from classes.forms import CookingClassForm, CookingClassSearchForm, ChefSearchForm
 from classes.models import Chef, Ingredient, Cuisine, CookingClass
@@ -142,6 +142,18 @@ class CookingClassListView(LoginRequiredMixin, generic.ListView):
         context = super().get_context_data(**kwargs)
         context["search_form"] = CookingClassSearchForm(self.request.GET)
         return context
+
+
+class ToggleAssignCookingClassView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        cookingclass = get_object_or_404(CookingClass, pk=pk)
+
+        if request.user in cookingclass.students.all():
+            cookingclass.students.remove(request.user)
+        else:
+            cookingclass.students.add(request.user)
+
+        return redirect("classes:cooking-classes-detail", pk=pk)
 
 
 class CookingClassDetailView(LoginRequiredMixin, generic.DetailView):

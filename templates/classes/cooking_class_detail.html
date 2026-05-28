@@ -37,4 +37,32 @@
     {% endif %}
   </section>
 
+  <section>
+    <h3>Course participants</h3>
+
+    <ul>
+      {% for student in cooking_class.students.all %}
+        <li>{{ student.username }}</li>
+      {% empty %}
+        <li>No students yet</li>
+      {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated %}
+      <form method="post" action="{% url 'classes:cooking-classes-toggle-assign' cooking_class.id %}">
+        {% csrf_token %}
+
+        {% if user in cooking_class.students.all %}
+          <button type="submit" class="btn btn-danger">
+            Remove me from this course
+          </button>
+        {% else %}
+          <button type="submit" class="btn btn-success">
+            Assign me to this course
+          </button>
+        {% endif %}
+      </form>
+  {% endif %}
+  </section>
+
 {% endblock %}
