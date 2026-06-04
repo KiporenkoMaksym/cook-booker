@@ -4,7 +4,8 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 
-from classes.forms import CookingClassForm, CookingClassSearchForm, ChefSearchForm
+from classes.forms import CookingClassForm, CookingClassSearchForm, ChefSearchForm, ProfessionalRegistrationForm, \
+    ChefUpdateForm
 from classes.models import Chef, Ingredient, Cuisine, CookingClass
 
 @login_required
@@ -56,13 +57,21 @@ class ChefDetailView(LoginRequiredMixin, generic.DetailView):
 
 class ChefCreateView(LoginRequiredMixin, generic.CreateView):
     model = Chef
-    fields = "__all__"
+    form_class = ProfessionalRegistrationForm
     success_url = reverse_lazy("classes:chef-list")
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        raw_password = form.cleaned_data.get("password")
+        user.set_password(raw_password)
+        user.save()
+
+        return super().form_valid(form)
 
 
 class ChefUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Chef
-    fields = "__all__"
+    form_class = ChefUpdateForm
     success_url = reverse_lazy("classes:chef-list")
 
 
