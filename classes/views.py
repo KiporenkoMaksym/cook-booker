@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
+from django.views.generic import TemplateView
 
 from classes.forms import CookingClassForm, CookingClassSearchForm, ChefSearchForm, ProfessionalRegistrationForm, \
     ChefUpdateForm
@@ -190,3 +191,7 @@ class CookingClassDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = CookingClass
     template_name = "classes/cooking_class_confirm_delete.html"
     success_url = reverse_lazy("classes:cooking-classes-list")
+
+
+class LogoutConfirmView(LoginRequiredMixin, TemplateView):
+    template_name = "registration/logout_confirm.html"

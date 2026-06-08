@@ -1,4 +1,6 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
+from django.views.generic import TemplateView
 
 from classes.views import (
     index,
@@ -22,6 +24,7 @@ from classes.views import (
     CookingClassUpdateView,
     CookingClassDeleteView,
     ToggleAssignCookingClassView,
+    LogoutConfirmView,
 )
 
 urlpatterns = [
@@ -46,6 +49,8 @@ urlpatterns = [
     path("cooking_classes/create/", CookingClassCreateView.as_view(), name="cooking-classes-create"),
     path("cooking_classes/<int:pk>/update/", CookingClassUpdateView.as_view(), name="cooking-classes-update"),
     path("cooking_classes/<int:pk>/delete", CookingClassDeleteView.as_view(), name="cooking-classes-delete"),
+    path("logout/confirm/", TemplateView.as_view(template_name="registration/logout_confirm.html"), name="logout-confirm"),
+    path("logout/", LogoutView.as_view(), name="logout"),
 ]
 
 app_name = "classes"
