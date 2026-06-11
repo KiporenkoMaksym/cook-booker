@@ -119,3 +119,17 @@ class ChefSearchForm(forms.Form):
             }
         )
     )
+
+
+class CuisineSearchForm(forms.Form):
+    cuisine = forms.CharField(
+        max_length=255,
+        required=False,
+        label = "",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Search by cuisine",
+            }
+        )
+    )

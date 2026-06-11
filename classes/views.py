@@ -6,7 +6,7 @@ from django.views import generic, View
 from django.views.generic import TemplateView
 
 from classes.forms import CookingClassForm, CookingClassSearchForm, ChefSearchForm, ProfessionalRegistrationForm, \
-    ChefUpdateForm
+    ChefUpdateForm, CuisineSearchForm
 from classes.models import Chef, Ingredient, Cuisine, CookingClass
 
 @login_required
@@ -85,6 +85,21 @@ class CuisineListView(LoginRequiredMixin, generic.ListView):
     model = Cuisine
     context_object_name = "cuisine_list"
     paginate_by = 5
+
+    def get_queryset(self):
+        queryset = Cuisine.objects.all()
+        form = CuisineSearchForm(self.request.GET)
+
+        if form.is_valid():
+            cuisine = form.cleaned_data.get("cuisine")
+            if cuisine:
+                queryset = queryset.filter(name__icontains=cuisine)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = CuisineSearchForm(self.request.GET)
+        return context
 
 
 class CuisineDetailView(LoginRequiredMixin, generic.DetailView):

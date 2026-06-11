@@ -19,37 +19,42 @@
   </form>
 
   {% if chef_list %}
-    <table class="table text-center">
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Years of experience</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-    {% for chef in chef_list %}
-      <tr>
-        <td>{{ chef.id }}</td>
-        <td><a href="{% url 'classes:chef-detail' chef.id%}">{{ chef.username }}</a></td>
-        <td>{{ chef.first_name }}</td>
-        <td>{{ chef.last_name }}</td>
-        <td>{{ chef.years_of_experience }}</td>
-        <td>
-          <a href="{% url 'classes:chef-update' chef.pk %}">
-            Update
-          </a>
-        </td>
-        <td>
-          <a href="{% url 'classes:chef-delete' chef.pk %}">
-            Delete
-          </a>
-        </td>
-      </tr>
-    {% endfor %}
-    </table>
+    <div class="table-responsive">
+      <table class="table text-center">
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Years of experience</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+        {% for chef in chef_list %}
+          <tr>
+            <td>{{ chef.id }}</td>
+            <td><a href="{% url 'classes:chef-detail' chef.id%}">{{ chef.username }}</a></td>
+            <td>{{ chef.first_name }}</td>
+            <td>{{ chef.last_name }}</td>
+            <td>{{ chef.years_of_experience }}</td>
+            <td>
+              <a href="{% url 'classes:chef-update' chef.pk %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'classes:chef-delete' chef.pk %}">
+                Delete
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    {% include "includes/pagination.html" %}
+
     {% else %}
-      <p>There are no chefs in courses</p>
+      <p class="ms-3">There are no chefs in courses</p>
   {% endif %}
 {% endblock %}
