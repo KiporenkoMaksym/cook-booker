@@ -15,7 +15,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center">{{ object|yesno:"Update, Create" }} cooking class</h1>
-  <form class="ms-3 me-3" action="" method="post" novalidate>
+  <form class="ms-3 me-3 col-2" action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
     <input type="submit" value="Submit" class="btn btn-success bg-gradient-info">

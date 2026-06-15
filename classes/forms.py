@@ -7,19 +7,25 @@ from classes.models import Ingredient, CookingClass, Chef
 class ProfessionalRegistrationForm(forms.ModelForm):
     first_name = forms.CharField(
         label="First name",
-        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter first name"}),
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Enter first name"}
+        ),
         required=True
     )
 
     last_name = forms.CharField(
         label="Last name",
-        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter last name"}),
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Enter last name"}
+        ),
         required=True
     )
 
     years_of_experience = forms.IntegerField(
         label="Years of experience",
-        widget=forms.NumberInput(attrs={"class": "form-control", "placeholder": "Enter years of experience"}),
+        widget=forms.NumberInput(
+            attrs={"class": "form-control", "placeholder": "Enter years of experience"}
+        ),
         required=True
     )
 
@@ -84,8 +90,20 @@ class CookingClassForm(forms.ModelForm):
     ingredients = forms.ModelMultipleChoiceField(
         queryset=Ingredient.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False,
+        required=True,
         label="Ingredients"
+    )
+    chefs = forms.ModelMultipleChoiceField(
+        queryset=Chef.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True,
+        label="Chefs"
+    )
+    students = forms.ModelMultipleChoiceField(
+        queryset=Chef.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="Students"
     )
 
     class Meta:
