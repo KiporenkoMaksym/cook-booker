@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "layouts/base_sections.html" %}
 
 {% block content %}
-  <h2>Are you sure delete {{ cuisine.name }} cuisine?</h2>
-  <form action="" method="post">
+  <h1 class="text-center pt-8">Are you sure delete {{ cuisine.name }} cuisine?</h1>
+  <form class="text-center" action="" method="post">
     {% csrf_token %}
     <input type="submit" value="Yes" class="btn btn-danger">
     <a href="{% url 'classes:cuisine-list' %}" class="btn btn-secondary">No</a>

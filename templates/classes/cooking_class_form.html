@@ -1,11 +1,23 @@
-{% extends "base.html" %}
-{% load crispy_forms_filters %}
+{% extends "layouts/base_sections.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update, Create" }} cooking class</h1>
-  <form action="" method="post" novalidate>
+
+  <style>
+    form .form-label, form legend.form-label {
+        font-size: 1rem !important;
+    }
+  </style>
+
+  <h1 class="pt-8 pb-8 ps-3 text-white"
+      style="background-image: url('{% static 'img/curved-images/cookingclass.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center">{{ object|yesno:"Update, Create" }} cooking class</h1>
+  <form class="ms-3 me-3" action="" method="post" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" class="btn btn-success">
+    {{ form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-success bg-gradient-info">
   </form>
 {% endblock %}

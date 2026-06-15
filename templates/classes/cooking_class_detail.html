@@ -1,12 +1,29 @@
-{% extends "base.html" %}
+{% extends "layouts/base_sections.html" %}
+{% load static %}
 
 {% block content %}
-  <h1>Master class: "{{ cooking_class.title }}"</h1>
+  <h1 class="pt-8 pb-8 text-white ps-3"
+      style="background-image: url('{% static 'img/curved-images/cookingclass_detail.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center">
+    Master class: "{{ cooking_class.title }}"
+  </h1>
 
-  <section>
+  <section class="ms-3">
     <h2>Course details</h2>
     <ul>
-      <li><strong>Kitchen type:</strong> {{ cooking_class.cuisine.name }}</li>
+      <li>
+        <strong>Kitchen type:</strong>
+        {% if cooking_class.cuisine %}
+          <a style="color: var(--bs-link-color)"
+             href="{% url 'classes:cuisine-detail' pk=cooking_class.cuisine.id %}">
+            {{ cooking_class.cuisine.name }}
+          </a>
+          {% else %}
+          No cuisine selected
+        {% endif %}
+      </li>
       <li><strong>Preparation time:</strong> {{ cooking_class.preparation_time }} h</li>
       <li><strong>Cost:</strong> {{ cooking_class.price }} $</li>
       <li>
@@ -14,7 +31,7 @@
           <strong class="me-1">Chef:</strong>
           <div class="d-flex flex-column">
             {% for chef in cooking_class.chefs.all %}
-              <a href="{% url 'classes:chef-detail' pk=chef.id %}">
+              <a style="color: var(--bs-link-color)" href="{% url 'classes:chef-detail' pk=chef.id %}">
                 {{ chef.first_name }} {{ chef.last_name }};
               </a>
             {% endfor %}
@@ -24,7 +41,7 @@
     </ul>
   </section>
   
-  <section>
+  <section class="ms-3">
     <h3>Required ingredients</h3>
     {% if cooking_class.ingredients.all %}
       <ul>
@@ -37,7 +54,7 @@
     {% endif %}
   </section>
 
-  <section>
+  <section class="ms-3">
     <h3>Course participants</h3>
 
     <ul>
@@ -57,7 +74,7 @@
             Remove me from this course
           </button>
         {% else %}
-          <button type="submit" class="btn btn-success">
+          <button type="submit" class="btn btn-success bg-gradient-info">
             Assign me to this course
           </button>
         {% endif %}
