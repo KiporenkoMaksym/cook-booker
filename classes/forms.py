@@ -8,7 +8,9 @@ class ProfessionalRegistrationForm(forms.ModelForm):
     first_name = forms.CharField(
         label="First name",
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Enter first name"}
+            attrs={
+                "class": "form-control",
+                "placeholder": "Enter first name"}
         ),
         required=True
     )
@@ -16,7 +18,9 @@ class ProfessionalRegistrationForm(forms.ModelForm):
     last_name = forms.CharField(
         label="Last name",
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Enter last name"}
+            attrs={
+                "class": "form-control",
+                "placeholder": "Enter last name"}
         ),
         required=True
     )
@@ -24,14 +28,21 @@ class ProfessionalRegistrationForm(forms.ModelForm):
     years_of_experience = forms.IntegerField(
         label="Years of experience",
         widget=forms.NumberInput(
-            attrs={"class": "form-control", "placeholder": "Enter years of experience"}
+            attrs={
+                "class": "form-control",
+                "placeholder": "Enter years of experience"}
         ),
         required=True
     )
 
     class Meta:
         model = Chef
-        fields = ["username", "first_name", "last_name", "password", "years_of_experience"]
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "password",
+            "years_of_experience"]
         widgets = {
             "username": forms.TextInput(attrs={"class": "form-control"}),
             "password": forms.PasswordInput(attrs={"class": "form-control"}),
@@ -72,7 +83,11 @@ class ChefUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Chef
-        fields = ["username", "first_name", "last_name", "years_of_experience"]
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "years_of_experience"]
         widgets = {
             "username": forms.TextInput(attrs={"class": "form-control"}),
         }

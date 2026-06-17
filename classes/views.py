@@ -1,12 +1,20 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import (render,
+                              get_object_or_404,
+                              redirect)
 from django.views import generic, View
 from django.views.generic import TemplateView
 
-from classes.forms import CookingClassForm, CookingClassSearchForm, ChefSearchForm, ProfessionalRegistrationForm, \
-    ChefUpdateForm, CuisineSearchForm
+from classes.forms import (
+    CookingClassForm,
+    CookingClassSearchForm,
+    ChefSearchForm,
+    ProfessionalRegistrationForm,
+    ChefUpdateForm,
+    CuisineSearchForm
+)
 from classes.models import Chef, Ingredient, Cuisine, CookingClass
 
 @login_required
@@ -28,7 +36,9 @@ def index(request):
         "num_visits": num_visits + 1,
     }
 
-    return render (request, "classes/index.html", context)
+    return render (request,
+                   "classes/index.html",
+                   context)
 
 class ChefListView(LoginRequiredMixin, generic.ListView):
     model = Chef
@@ -165,18 +175,20 @@ class CookingClassListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search_form"] = CookingClassSearchForm(self.request.GET)
+        context["search_form"] = CookingClassSearchForm(
+            self.request.GET
+        )
         return context
 
 
 class ToggleAssignCookingClassView(LoginRequiredMixin, View):
     def post(self, request, pk):
-        cookingclass = get_object_or_404(CookingClass, pk=pk)
+        cooking_class = get_object_or_404(CookingClass, pk=pk)
 
-        if request.user in cookingclass.students.all():
-            cookingclass.students.remove(request.user)
+        if cooking_class.students.filter(id=request.user.id).exists():
+            cooking_class.students.remove(request.user)
         else:
-            cookingclass.students.add(request.user)
+            cooking_class.students.add(request.user)
 
         return redirect("classes:cooking-classes-detail", pk=pk)
 
@@ -185,7 +197,9 @@ class CookingClassDetailView(LoginRequiredMixin, generic.DetailView):
     model = CookingClass
     template_name = "classes/cooking_class_detail.html"
     context_object_name = "cooking_class"
-    queryset = CookingClass.objects.select_related("cuisine").prefetch_related("ingredients")
+    queryset = CookingClass.objects.select_related(
+        "cuisine"
+    ).prefetch_related("ingredients")
 
 
 class CookingClassCreateView(LoginRequiredMixin, generic.CreateView):

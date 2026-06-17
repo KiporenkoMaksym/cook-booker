@@ -1,5 +1,8 @@
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MinValueValidator, MinLengthValidator
+from django.core.validators import (
+    MinValueValidator,
+    MinLengthValidator
+)
 from django.db import models
 
 
@@ -14,7 +17,9 @@ class Chef(AbstractUser):
         verbose_name_plural = "chefs"
 
     def __str__(self):
-        return f"{self.username} {self.first_name} {self.last_name}".strip()
+        return (f"{self.username}"
+                f"{self.first_name}"
+                f"{self.last_name}").strip()
 
 
 class Cuisine(models.Model):
@@ -47,12 +52,31 @@ class Ingredient(models.Model):
 
 class CookingClass(models.Model):
     title = models.CharField(max_length=255, unique=True)
-    preparation_time = models.IntegerField(validators=[MinValueValidator(1)])
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE, related_name="cooking_classes")
-    ingredients = models.ManyToManyField(Ingredient, related_name="cooking_classes")
-    chefs = models.ManyToManyField(Chef, related_name="cooking_classes")
-    students = models.ManyToManyField(Chef, related_name="joined_classes", blank=True)
+    preparation_time = models.IntegerField(
+        validators=[MinValueValidator(1)]
+    )
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+    cuisine = models.ForeignKey(
+        Cuisine,
+        on_delete=models.CASCADE,
+        related_name="cooking_classes"
+    )
+    ingredients = models.ManyToManyField(
+        Ingredient,
+        related_name="cooking_classes"
+    )
+    chefs = models.ManyToManyField(
+        Chef,
+        related_name="cooking_classes"
+    )
+    students = models.ManyToManyField(
+        Chef,
+        related_name="joined_classes",
+        blank=True
+    )
 
     class Meta:
         verbose_name_plural = "cooking classes"
