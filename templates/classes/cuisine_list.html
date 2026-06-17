@@ -1,0 +1,54 @@
+{% extends "layouts/base_sections.html" %}
+{% load static %}
+
+{% block content %}
+  <h1 class="d-flex justify-content-around align-items-center pt-8 pb-8 text-white"
+      style="background-image: url('{% static 'img/curved-images/cuisines.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat">
+    List of world cuisines
+    <a href="{% url 'classes:cuisine-create' %}" class="btn btn-primary link-to-page mb-0">
+      Create
+    </a>
+  </h1>
+
+  <form action="" method="get" class="mt-3 ms-3 me-3">
+    {{ search_form }}
+    <button type="submit" class="btn btn-primary mt-3">Search</button>
+    <a href="{% url 'classes:cuisine-list' %}">Clear search</a>
+  </form>
+
+  {% if cuisine_list %}
+    <div class="table-responsive">
+      <table class="table text-center">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+        {% for cuisine in cuisine_list %}
+          <tr>
+            <td>{{ cuisine.id }}</td>
+            <td><a href="{% url 'classes:cuisine-detail' cuisine.id%}">{{ cuisine.name }}</a></td>
+            <td>
+              <a href="{% url 'classes:cuisine-update' cuisine.id %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'classes:cuisine-delete' cuisine.id %}">
+                Delete
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    {% include "includes/pagination.html" %}
+
+  {% else %}
+    <p class="ms-3">There are no cuisines in the database.</p>
+  {% endif %}
+{% endblock %}

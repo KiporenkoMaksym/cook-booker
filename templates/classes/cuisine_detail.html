@@ -1,0 +1,24 @@
+{% extends "layouts/base_sections.html" %}
+{% load static %}
+
+{% block content %}
+  <h2 class="pt-8 pb-8 ps-3 text-white"
+      style="background-image: url('{% static 'img/curved-images/cuisine_detail.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: bottom">List of all courses {{ cuisine.name }} cuisine</h2>
+
+  {% if cuisine.cooking_classes.all %}
+    <ul>
+    {% for cooking_class in cuisine.cooking_classes.all %}
+      <li>
+        <a class="fs-3" href="{% url 'classes:cooking-classes-detail' pk=cooking_class.id %}">
+          {{ cooking_class.title }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p class="ps-3 fs-4">Cooking classes not added yet!</p>
+  {% endif %}
+{% endblock %}

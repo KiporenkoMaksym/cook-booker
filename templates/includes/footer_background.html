@@ -1,0 +1,54 @@
+{% load static %}
+
+<footer class="footer pt-5">
+  <hr class="horizontal dark mb-5">
+  <div class="container">
+    <div class=" row">
+      <div class="col-md-2 col-sm-6 col-6 mb-4 mx-auto">
+        <div>
+          <h6 class="text-gradient text-primary font-weight-bolder text-center">Cooking Courses</h6>
+          <ul class="flex-column ms-n3 nav text-center">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'classes:index' %}">
+                Home
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'classes:chef-list' %}">
+                Chefs
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'classes:cuisine-list' %}">
+                Cuisines
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'classes:ingredient-list' %}">
+                Ingredients
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'classes:cooking-classes-list' %}">
+                Cooking Classes
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="text-center">
+          <p class="my-4 text-sm">
+            &copy; Cooking Courses
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

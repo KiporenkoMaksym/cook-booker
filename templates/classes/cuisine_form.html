@@ -1,0 +1,23 @@
+{% extends "layouts/base_sections.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block content %}
+
+  <style>
+    form .form-label, form legend.form-label {
+        font-size: 1rem !important;
+    }
+  </style>
+
+  <h1 class="pt-8 pb-8 ps-3 text-white" style="background-image: url('{% static 'img/curved-images/cuisine_form.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;">{{ object|yesno:"Update, Create" }} cuisine</h1>
+  <form class="ms-3 me-3 col-2" action="" method="post" novalidate>
+    {% csrf_token %}
+
+    {{ form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-success bg-gradient-info">
+  </form>
+{% endblock %}

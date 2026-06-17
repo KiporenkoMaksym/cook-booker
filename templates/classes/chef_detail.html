@@ -1,0 +1,32 @@
+{% extends "layouts/base_sections.html" %}
+{% load static %}
+
+{% block content %}
+  <h1 class="pt-8 pb-8 ps-3 text-white"
+      style="background-image: url('{% static 'img/curved-images/chef_detail.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: bottom">
+    Username: {{ chef.username }}
+  </h1>
+
+  <p class="ms-3"><strong>First name:</strong> {{ chef.first_name }}</p>
+  <p class="ms-3"><strong>Last name:</strong> {{ chef.last_name }}</p>
+
+  <p class="ms-3"><strong>Work experience:</strong> {{ chef.years_of_experience }} year{{ chef.years_of_experience|pluralize }}</p>
+
+  <h2 class="ms-3">Chef's master classes:</h2>
+    {% if chef.cooking_classes.all %}
+      <ul class="ms-3">
+        {% for cooking_class in chef.cooking_classes.all %}
+          <li>
+            <a style="color: var(--bs-link-color)" href="{% url 'classes:cooking-classes-detail' pk=cooking_class.id %}">
+              {{ cooking_class.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>This chef does not yet hold master classes.</p>
+    {% endif %}
+{% endblock %}
