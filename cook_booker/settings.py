@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-$s(djgeqxwsjdd6)w^7950_wwavodywk_e#4+hwqt(ge^la0*8"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-$s(djgeqxwsjdd6)w^7950_wwavodywk_e#4+hwqt(ge^la0*8")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
 ALLOWED_HOSTS = ['cook-booker.onrender.com', '127.0.0.1', 'localhost']
 
