@@ -4,7 +4,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = ['cook-booker.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["cook-booker.onrender.com", "127.0.0.1", "localhost"]
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -15,3 +15,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
